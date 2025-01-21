@@ -118,10 +118,10 @@ def process(
             'content': item['content'],
             'interactivity': item['interactivity'],
             'coordinates': {
-                'x': int(coords[0]) if coords else None,  # x coordinate
-                'y': int(coords[1]) if coords else None,  # y coordinate
-                'width': int(coords[2]) if coords else None,  # width
-                'height': int(coords[3]) if coords else None  # height
+                'x1': int(item['bbox'][0] * image.size[0]) if item['bbox'] else None,  # left
+                'y1': int(item['bbox'][1] * image.size[1]) if item['bbox'] else None,  # top
+                'x2': int(item['bbox'][2] * image.size[0]) if item['bbox'] else None,  # right
+                'y2': int(item['bbox'][3] * image.size[1]) if item['bbox'] else None   # bottom
             }
         }
         formatted_response.append(response_item)
@@ -131,8 +131,8 @@ def process(
         f"type: {x['type']}, "
         f"content: {x['content']}, "
         f"interactivity: {x['interactivity']}, "
-        f"coordinates: (x={x['coordinates']['x']}, y={x['coordinates']['y']}, "
-        f"width={x['coordinates']['width']}, height={x['coordinates']['height']})"
+        f"coordinates: (x1={x['coordinates']['x1']}, y1={x['coordinates']['y1']}, "
+        f"x2={x['coordinates']['x2']}, y2={x['coordinates']['y2']})"
         for x in formatted_response
     ])
     
@@ -236,10 +236,10 @@ async def parse_image(file: UploadFile = File(...)):
             'content': item['content'],
             'interactivity': item['interactivity'],
             'coordinates': {
-                'x': int(coords[0]) if coords else None,
-                'y': int(coords[1]) if coords else None,
-                'width': int(coords[2]) if coords else None,
-                'height': int(coords[3]) if coords else None
+                'x1': int(item['bbox'][0]),  # left
+                'y1': int(item['bbox'][1]),  # top
+                'x2': int(item['bbox'][2]),  # right
+                'y2': int(item['bbox'][3])   # bottom
             }
         }
         response_data.append(response_item)

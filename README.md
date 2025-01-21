@@ -66,3 +66,11 @@ If you find our work useful, please consider citing our work:
       url={https://arxiv.org/abs/2408.00203}, 
 }
 ```
+
+
+
+
+
+KM
+
+python gradio_demo.py --icon_detect_model weights/icon_detect/best.pt --icon_caption_model florence2
